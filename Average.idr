@@ -18,5 +18,20 @@ average str = let numWords = wordCount str
 showAverage : String -> String
 showAverage str = "The average word length is " ++ show (average str) ++ "\n"
 
+palindrome : Nat -> String -> Bool
+palindrome n str = str == (String.toLower str) && length str > n
+
+counts : String -> (Nat, Nat)
+counts str = (length (words str), length str)
+
+topTen : Ord a => List a -> List a
+topTen list = take 10 (reverse (sort list))
+
+overLength : Nat -> List String -> Nat
+overLength n words = length (filter (\w => length w > n) words)
+
+processInput : String -> String
+processInput str = show $ palindrome 5 str
+                   
 main : IO ()
-main = repl "Enter a string: " showAverage
+main = repl "Enter a string: " processInput
